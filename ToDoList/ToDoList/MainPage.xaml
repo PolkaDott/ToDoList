@@ -4,6 +4,18 @@
              x:Class="ToDoList.MainPage">
 
     <StackLayout>
+        <FlexLayout Padding="10">
+
+            <Entry x:Name="entry" Placeholder="Task to do" 
+                   FlexLayout.Basis="75%"
+                   TextColor="#8a8ce0"
+                   PlaceholderColor="#d2d2e4"
+                   />
+            <Button Text="ADD NEW +" FlexLayout.Basis="25%"
+                    BackgroundColor="Transparent"
+                    TextColor="#8a8ce0"/>
+        </FlexLayout>
+        
         
     </StackLayout>
 
