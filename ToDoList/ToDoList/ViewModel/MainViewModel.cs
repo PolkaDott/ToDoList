@@ -12,11 +12,35 @@ namespace ToDoList.ViewModel
         {
             TaskList = new ObservableCollection<Task>();
             TaskList.Add(new Task("Initial Task"));
+            OnPropertyChanged(nameof(TaskList));
         }
 
-        public string Size
+        public string InputField
         {
-            get => TaskList.Count.ToString();
+            get => InputField;
+            set
+            {
+                if (InputField != value)
+                {
+                    InputField = value;
+                    OnPropertyChanged(nameof(InputField));
+                }
+            }
         }
+
+        public int Size
+        {
+            get => TaskList.Count;
+        }
+
+        public Command AddTask => new Command(() =>
+        {
+            InputField = "";
+            if (string.IsNullOrWhiteSpace(InputField) == false)
+            {
+                TaskList.Add(new Task(InputField));
+                InputField = "";
+            }
+        });
     }
 }

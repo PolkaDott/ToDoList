@@ -7,6 +7,7 @@ namespace ToDoList.Model
         public Task(string title)
         {
             Title = title;
+            IsDone = true;
         }
         public string Title
         {

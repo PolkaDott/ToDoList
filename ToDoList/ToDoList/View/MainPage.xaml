@@ -10,19 +10,23 @@
         <FlexLayout>
             <Entry x:Name="entry" Placeholder="Task to do" 
                    FlexLayout.Basis="70%"
-                   TextColor="#8a8ce0"
+                   TextColor="#8a8ce0" Text="{Binding InputField, Mode=TwoWay}"
                    PlaceholderColor="#d2d2e4"
                    />
             <Button Text="ADD NEW +" FlexLayout.Basis="30%"
                     BackgroundColor="Transparent"
-                    TextColor="#8a8ce0"/>
+                    TextColor="#8a8ce0" Command="{Binding AddTask}"/>
         </FlexLayout>
+        <Label Text="{Binding Size}"/>
         <ScrollView>
             <StackLayout BindableLayout.ItemsSource="{Binding TaskList}">
+                <BindableLayout.EmptyView>
+                    <Label Text="It's empty" FontSize="18" TextColor="#8a8ce0"
+                           HorizontalTextAlignment="Center" VerticalOptions="Start" />
+                </BindableLayout.EmptyView>
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type models:Task}">
-                        <Frame BackgroundColor="Red">
-                            <FlexLayout AlignItems="Center">
+                        <FlexLayout AlignItems="Center">
                                 <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay}"
                                 Color="#a0a8f3" FlexLayout.Basis="10%"/>
                                 <Label TextColor="#8a8ce0" Text="{Binding Title, Mode=OneWay}" 
@@ -35,7 +39,6 @@
                                 WidthRequest="25"/>
                             </FlexLayout>
 
-                        </Frame>
                         
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
