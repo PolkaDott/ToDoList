@@ -11,8 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="source\**" />
+    <EmbeddedResource Remove="source\**" />
+    <None Remove="source\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Task.cs" />
     <Compile Remove="Task.xaml.cs" />
+    <Compile Remove="ViewModel\Page1.cs" />
   </ItemGroup>
 
   <ItemGroup>

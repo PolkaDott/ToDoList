@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:ToDoList.ViewModel"
+             xmlns:models="clr-namespace:ToDoList.Model"
+             x:DataType="local:MainViewModel"
+             x:Class="ToDoList.MainPage">
+
+    <StackLayout Padding="10">
+        <FlexLayout>
+            <Entry x:Name="entry" Placeholder="Task to do" 
+                   FlexLayout.Basis="70%"
+                   TextColor="#8a8ce0"
+                   PlaceholderColor="#d2d2e4"
+                   />
+            <Button Text="ADD NEW +" FlexLayout.Basis="30%"
+                    BackgroundColor="Transparent"
+                    TextColor="#8a8ce0"/>
+        </FlexLayout>
+        <ScrollView>
+            <StackLayout BindableLayout.ItemsSource="{Binding TaskList}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type models:Task}">
+                        <Frame BackgroundColor="Red">
+                            <FlexLayout AlignItems="Center">
+                                <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay}"
+                                Color="#a0a8f3" FlexLayout.Basis="10%"/>
+                                <Label TextColor="#8a8ce0" Text="{Binding Title, Mode=OneWay}" 
+                                   FlexLayout.Basis="80%"/>
+                                <ImageButton 
+                                Source="bin.png"
+                                BackgroundColor="Transparent"
+                                FlexLayout.Basis="10%"
+                                HeightRequest="25"
+                                WidthRequest="25"/>
+                            </FlexLayout>
+
+                        </Frame>
+                        
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>
