@@ -38,7 +38,7 @@ namespace ToDoList.ViewModel
             }
         });
 
-        public Command<Task> RemoveTask = new Command<Task>((task) =>
+        public Command<Task> RemoveTask => new Command<Task>((task) =>
         {
             TaskList.Remove(task);
         });
