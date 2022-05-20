@@ -9,6 +9,11 @@ namespace ToDoList.Model
             _title = title;
             _isDone = false;
         }
+        public Task(string title, bool isDone)
+        {
+            _title = title;
+            _isDone = isDone;
+        }
 
         private string _title;
         public string Title

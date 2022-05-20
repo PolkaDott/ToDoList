@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ToDoList.Model;
 using Xamarin.Forms;
@@ -44,17 +45,25 @@ namespace ToDoList.ViewModel
         public Command<Task> RemoveTask => new Command<Task>((task) =>
         {
             TaskList.Remove(task);
+            SaveTasksToStorage();
         });
 
         public void SaveTasksToStorage()
         {
-            Preferences.Set("tasks", JsonConvert.SerializeObject(TaskList));
+            List<(string, bool)> tasks = new List<(string, bool)>(); // этот костыль пришлось сделать из-за того, что Task наследует BindableObject и у него есть поля, которые невозможно десеарилизовать, из-за чего возникало исключение в строке 62 при десеарилизации
+            foreach (Task task in TaskList)
+                tasks.Add((task.Title, task.IsDone));
+            string items = JsonConvert.SerializeObject(tasks);
+            Preferences.Set("tasks",items);
         }
 
         public void GetTasksFromStorage()
         {
             string items = Preferences.Get("tasks", "[]");
-            TaskList = new ObservableCollection<Task>( JsonConvert.DeserializeObject<ObservableCollection<Task>>(items));
+            List<(string, bool)> tasks = JsonConvert.DeserializeObject<List<(string, bool)>>(items);
+            TaskList = new ObservableCollection<Task>();
+            foreach ((string, bool) task in tasks)
+                TaskList.Add(new Task(task.Item1, task.Item2));
             OnPropertyChanged(nameof(TaskList));
         }
     }
