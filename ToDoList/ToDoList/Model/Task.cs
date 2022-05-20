@@ -6,24 +6,28 @@ namespace ToDoList.Model
     {
         public Task(string title)
         {
-            Title = title;
-            IsDone = true;
+            _title = title;
+            _isDone = false;
         }
+
+        private string _title;
         public string Title
         {
-            get => Title;
+            get => _title;
             set 
             {
-                Title = value;
+                _title = value;
                 OnPropertyChanged(nameof(Title));
             }
         }
+
+        private bool _isDone;
         public bool IsDone
         {
-            get => IsDone;
+            get => _isDone;
             set
             {
-                IsDone = value;
+                _isDone = value;
                 OnPropertyChanged(nameof(IsDone));
             }
         }

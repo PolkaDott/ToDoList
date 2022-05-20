@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:ToDoList.ViewModel"
-             xmlns:models="clr-namespace:ToDoList.Model"
+             xmlns:models="clr-namespace:ToDoList.Model;assembly=ToDoList"
              x:DataType="local:MainViewModel"
              x:Class="ToDoList.MainPage">
 
@@ -17,7 +17,6 @@
                     BackgroundColor="Transparent"
                     TextColor="#8a8ce0" Command="{Binding AddTask}"/>
         </FlexLayout>
-        <Label Text="{Binding Size}"/>
         <ScrollView>
             <StackLayout BindableLayout.ItemsSource="{Binding TaskList}">
                 <BindableLayout.EmptyView>
@@ -27,19 +26,16 @@
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type models:Task}">
                         <FlexLayout AlignItems="Center">
-                                <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay}"
                                 Color="#a0a8f3" FlexLayout.Basis="10%"/>
-                                <Label TextColor="#8a8ce0" Text="{Binding Title, Mode=OneWay}" 
+                            <Label TextColor="#8a8ce0" Text="{Binding Title, Mode=OneWay}" 
                                    FlexLayout.Basis="80%"/>
-                                <ImageButton 
+                            <ImageButton 
                                 Source="bin.png"
                                 BackgroundColor="Transparent"
-                                FlexLayout.Basis="10%"
-                                HeightRequest="25"
-                                WidthRequest="25"/>
-                            </FlexLayout>
-
-                        
+                                FlexLayout.Basis="10%" 
+                                HeightRequest="25" WidthRequest="25"/>
+                        </FlexLayout>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
