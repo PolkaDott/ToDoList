@@ -1,4 +1,5 @@
 ﻿using System;
+using ToDoList.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +16,7 @@ namespace ToDoList
 
         protected override void OnStart()
         {
+
         }
 
         protected override void OnSleep()

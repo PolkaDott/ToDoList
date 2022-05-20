@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using ToDoList.Model;
 using Xamarin.Forms;
+using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 namespace ToDoList.ViewModel
 {
@@ -10,9 +12,9 @@ namespace ToDoList.ViewModel
         public ObservableCollection<Task> TaskList { get; set; }
         public MainViewModel()
         {
-            TaskList = new ObservableCollection<Task>();
-            TaskList.Add(new Task("Initial Task 1"));
-            TaskList.Add(new Task("Initial Task 2"));
+            GetTasksFromStorage();
+            //TaskList.Add(new Task("Initial Task 1"));
+            //TaskList.Add(new Task("Initial Task 2"));
         }
 
         private string _inputField;
@@ -35,6 +37,7 @@ namespace ToDoList.ViewModel
             {
                 TaskList.Insert(0, new Task(InputField));
                 InputField = "";
+                SaveTasksToStorage();
             }
         });
 
@@ -42,5 +45,17 @@ namespace ToDoList.ViewModel
         {
             TaskList.Remove(task);
         });
+
+        public void SaveTasksToStorage()
+        {
+            Preferences.Set("tasks", JsonConvert.SerializeObject(TaskList));
+        }
+
+        public void GetTasksFromStorage()
+        {
+            string items = Preferences.Get("tasks", "[]");
+            TaskList = new ObservableCollection<Task>( JsonConvert.DeserializeObject<ObservableCollection<Task>>(items));
+            OnPropertyChanged(nameof(TaskList));
+        }
     }
 }
