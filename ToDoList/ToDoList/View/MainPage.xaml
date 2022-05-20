@@ -53,7 +53,7 @@
                                                      Property="IsPressed"
                                                      Value="True">
                                         <Setter Property="BackgroundColor"
-                                                        Value="#8ee000" />
+                                                        Value="#FFFFFF" />
                                     </Trigger>
                                 </ImageButton.Triggers>
                             </ImageButton>
